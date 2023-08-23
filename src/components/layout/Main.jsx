@@ -6,6 +6,6 @@ function Main() {
       <input type="text" className='textInput'/>
     </div>
   )
-}
+}  
 
 export default Main
