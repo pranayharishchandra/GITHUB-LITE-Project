@@ -55,3 +55,23 @@
   transform: translate(-50%, 50%);
   opacity: 1;
  }
+
+ .user-name-pic {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  overflow: auto;
+ }
+
+ .text-title{
+  position: absolute;
+  left: 80px;
+  top:15px;
+ }
+
+ img {
+  height: 60px;
+  width: 60px;
+  margin: 10px;
+  border-radius: 50%;
+ }

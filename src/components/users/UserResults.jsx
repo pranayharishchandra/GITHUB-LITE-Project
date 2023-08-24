@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import UserCard from "../shared/UserCard";
+import UserCard from "../shared/usercards/UserCard";
+import Spinner from "../shared/spinner/Spinner";
 
 function UserResults() {
 
@@ -32,6 +33,11 @@ function UserResults() {
         setLoading(false);
     }
 
+    if (loading) {
+        // style not working
+        return <Spinner style={{justifySelf:'center'}}/>
+    }
+
 
 
 
@@ -42,8 +48,9 @@ function UserResults() {
                 // <h3 className="user">{user.login}</h3>
                 <UserCard 
                     className="user" 
-                    userName={user.login} 
-                    customKey={user.id} 
+                    // userName={user.login} 
+                    // customKey={user.id} 
+                    user={user}
                     key={user.id} 
                     />
 
