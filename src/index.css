@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   flex-direction: column;
   background-color: rgb(154, 154, 124);
@@ -76,4 +76,24 @@ footer {
   width:40%;
   height: 30px;
   border: none;
+}
+
+.users-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  /* color:beige;
+  display: grid;
+  column-gap: 10px;
+  grid-template-columns: auto auto auto;
+  padding: 10px; */
+}
+
+.grid-item {
+  /* background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center; */
 }
