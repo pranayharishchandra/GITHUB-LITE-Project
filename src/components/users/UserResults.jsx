@@ -20,9 +20,10 @@ function UserResults() {
         // This token is used to authenticate the request and access GitHub's API.
         const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users`, {
             headers: {
-                Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
+              Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
             },
-        });
+          });
+          
 
         const data = await response.json(); // parsing the data fetched from the API to json
         console.log(data);
@@ -39,11 +40,15 @@ function UserResults() {
         <div className="users-container">
             {users.map((user) => (
                 // <h3 className="user">{user.login}</h3>
-                <UserCard className="grid-item"
-                          userName={user.login}
-                        />
+                <UserCard 
+                    className="user" 
+                    userName={user.login} 
+                    customKey={user.id} 
+                    key={user.id} 
+                    />
 
             ))}
+            
         </div>
     )
 }
