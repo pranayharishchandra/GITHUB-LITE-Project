@@ -1,4 +1,4 @@
-import { act } from "react-dom/test-utils";
+
 
 function githubReducer (state, action) {
     // state => current state
