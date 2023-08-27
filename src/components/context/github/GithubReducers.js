@@ -1,3 +1,5 @@
+import { act } from "react-dom/test-utils";
+
 function githubReducer (state, action) {
     // state => current state
     // action => string, "increase" or "decrease"
@@ -12,6 +14,11 @@ function githubReducer (state, action) {
             return {
                 ...state,
                 loading: true,  // basically doing setLoading(true) if we we using useState
+            }
+        case 'SET_USERS':
+            return {
+                ...state,
+                users: action.payload
             }
         default:
             return state;

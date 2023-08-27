@@ -31,22 +31,25 @@ export function GithubProvider ({ children }) {
 
     setLoading();
 
-    const params = new URLSearchParams({q:text});
+    // const params = new URLSearchParams({q:text}); 
 
     // { headers: { Authorization: ... } }: This is the *CONFIGURATION OBJECT* passed to the fetch function
     // "Authorization" header: with a value that includes the word "token" followed by the GitHub access token.
     // The access token is taken from the REACT_APP_GITHUB_TOKEN environment variable. 
     // This token is used to authenticate the request and access GitHub's API.
-    // const response = await fetch(`${GITHUB_URL}/search/users?q=${params}`, {
-    const response = await fetch(`${GITHUB_URL}/users`, {
-      headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
-      },
-    }); 
+
+    // const response = await fetch(`${GITHUB_URL}/search/users?q=${params.toString()}`, {
+      const params = new URLSearchParams({ q: text });
+
+      const response = await fetch(`${GITHUB_URL}/search/users?${params.toString()}`, {
+          headers: {
+              Authorization: `token ${GITHUB_TOKEN}`,
+          },
+      });
 
 
-    const data = await response.json(); // parsing the data fetched from the API to json
-    // const { items : data } = await response.json(); // the response we are getting, we only want 'items' value,
+    // const data = await response.json(); // parsing the data fetched from the API to json
+    const { items : data } = await response.json(); // the response we are getting, we only want 'items' value,
                                                     // and we are storing it as data, so i don't need to change my code below
     console.log(data);
     /**
@@ -107,6 +110,13 @@ export function GithubProvider ({ children }) {
     })
   };
 
+  function setUsers(users) {
+    dispatch({
+      type:'SET_USERS',
+      payload:users
+    })
+  }
+
 
 
   return <GithubContext.Provider
@@ -115,7 +125,8 @@ export function GithubProvider ({ children }) {
                       //  loading,
                        users:   state.users,
                        loading: state.loading,
-                       searchUsers
+                       searchUsers,
+                       setUsers
                       }}>
     {children}
   </GithubContext.Provider>
