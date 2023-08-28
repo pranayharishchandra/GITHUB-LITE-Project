@@ -24,7 +24,6 @@ export function AlertProvider( {children} ) {
 
 
     return <AlertContext.Provider value={{
-                                            // alert:state.alert,
                                             alert: state,
                                             setAlert,
 
