@@ -123,7 +123,7 @@ export function GithubProvider ({ children }) {
                 value={{
                       // users, 
                       //  loading,
-                       users:   state.users,
+                       users:   state.users,      // user of the current state
                        loading: state.loading,
                        searchUsers,
                        setUsers
