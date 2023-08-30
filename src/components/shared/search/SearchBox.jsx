@@ -1,4 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
+// import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import './Searchbox.css';
 import Alert from '../../pages/Alert';
 import GithubContext from '../../context/github/GithubContext';
@@ -77,8 +78,8 @@ function SearchBox() {
 
                 // but now to update the UI we will be requring to show a component, 
                 // so made a alert component
-            }
-            searchUsers(text);
+            } else
+                searchUsers(text);
     }
 
     function clearHandler() {

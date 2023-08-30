@@ -10,6 +10,12 @@ function githubReducer (state, action) {
                 users: action.payload,
                 loading: false,           // loading is not passed but it's accessible throughout the funcition
             }
+        case 'GET_USER':
+            return {
+                ...state,
+                user: action.payload,
+                loading:false
+            }
         case 'SET_LOADING':
             return {
                 ...state,

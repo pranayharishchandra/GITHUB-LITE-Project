@@ -1,7 +1,7 @@
 import { useContext } from "react"
 // import { useContext, useEffect, useState } from "react"
-import UserCard from "../shared/usercards/UserCard";
-import Spinner from "../shared/spinner/Spinner";
+import UserCard from  "../shared/usercards/UserCard";
+import Spinner  from "../shared/spinner/Spinner";
 import GithubContext from "../context/github/GithubContext";
 
 function UserResults() {
