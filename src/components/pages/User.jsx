@@ -5,13 +5,17 @@ import GithubContext from "../context/github/GithubContext"
 import Spinner from "../shared/spinner/Spinner";
 import { Link } from "react-router-dom";
 
+import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa' 
+
 import './style/user.css'
+// import './style/user.scss'
+
 
 // match doesn't works in version 6, here use params, it works with version 5 and 6 both
 function User() {
     // const { getUser, user, loading, getUserRepos, repos } = useContext(GithubContext);
 
-    const { getUser, user, loading,  } = useContext(GithubContext);
+    const { getUser, user, loading, } = useContext(GithubContext);
 
     const params = useParams();
 
@@ -21,8 +25,8 @@ function User() {
      * Cannot read properties of undefined (reading 'length')
      * TypeError: Cannot read properties of undefined (reading 'length')
      */
-    
-    
+
+
     /* WARNING FOR BELOW CODE: React Hook useEffect has missing dependencies: 'getUser' and 'params.login'.
      *  Either include them or remove the dependency  */
 
@@ -37,7 +41,7 @@ function User() {
     //     async function fetchData() {
     //       await getUser(params.login);
     //     };
-    
+
     //     fetchData();
     // //   }, [params.login]);
     //   }, [getUser, params.login]);
@@ -46,26 +50,26 @@ function User() {
         return (<Spinner />)
     }
 
-    console.log('user',user);
+    console.log('user', user);
 
     const {
         name,
-        type,
+        // type,
         avatar_url,
         location,
         bio,
-        blog,
-        twitter_username,
-        login,
+        // blog,
+        // // twitter_username,
+        // login,
         html_url,
         followers,
         following,
         public_repos,
         public_gists,
         hireable,
-      } = user;
+    } = user;
 
-    
+
 
 
 
@@ -76,34 +80,58 @@ function User() {
         you can extract that part using useParams, if not understood visit following link
         https://reactrouter.com/en/main/hooks/use-params#useparams 
     */
-  return (
-<>
-  <div className="user-container">
-    <Link className="back-to-search" to='/'>BACK TO SEARCH</Link>
-    user : {params.login}
-            
-    <div className="profile">
-        <div className="image">
-          <figure>
-            <img src={avatar_url} alt='user-img' style={{width:'60px'}}/>
-          </figure>
+    return (
+        <div className="profile-card-container" style={{}}>
+            <div className="profile-card"></div>
+            <input id="slider" className="customSlider" type="checkbox" />
+            <label htmlFor="slider"></label>
+
+            <div className="wrapper">
+                <div className="top-icons">
+                    <i className="fas fa-long-arrow-alt-left"></i>
+                    <i className="fas fa-ellipsis-v"></i>
+                    <i className="far fa-heart"></i>
+                </div>
+
+                <div className="profile">
+                    <img src={`${avatar_url}`} className="thumbnail" alt="" />
+
+                    <div className="check"><i className="fas fa-check"></i></div>
+                    <h3 className="name">{`${name}`}</h3>
+                    {hireable && <p className="title">HIRABLE</p>}
+                    {bio && <p className="description">{bio}</p>}
+                    {location && <p className="title" style={{marginTop:'15px', marginBottom:'15px'}}>{`${location}`}</p>}
+
+                    <Link to={html_url} style={{textDecoration:'none'}}>
+                    <button type="button" className="btn" style={{fontSize:'22px'}}>GITHUB</button>
+                    </Link>
+                        
+                </div>
+
+                <div className="social-icons">
+                    <div className="icon">
+                        <a href="/"><i className="fab fa-dribbble"><FaCodepen /></i></a>
+                        <h4>999</h4>
+                        <p>REPOS</p>
+                    </div>
+
+                    <div className="icon">
+                        <Link to="#"><i className="fab fa-behance"> <FaUsers /> </i></Link>
+                        <h4>{followers}</h4>
+                        <p>Followers</p>
+                    </div>
+
+                    <div className="icon">
+                        <Link to="#"><i className="fab fa-twitter"> <FaUserFriends /> </i></Link>
+                        <h4>{following}</h4>
+                        <p>Following</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div className="profile-contents">
-          <div className="profile-content">NAME  :  {name} </div>
-          <div className="profile-content">LOGIN :  {login}</div>
 
-          {hireable && <div className="profile-content">STATUS : HIRABLE </div>}
-          <div className="profile-content"> BIO : <p>{bio}</p></div>
-
-          <div className="profile-content"> </div>
-        </div>
-    </div>
-
-    
-            
-  </div>
-</>
-  )
+    )
 }
 
 export default User

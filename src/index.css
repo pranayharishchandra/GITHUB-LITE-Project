@@ -17,7 +17,7 @@
 }
 
 Link.link {
-  color: wheat;
+  color: rgb(255, 255, 255);
   display: block;
   text-align: center;
   padding: 14px 16px;
@@ -35,11 +35,6 @@ Link.link {
 }
 
 
-.active {
-  /* background-color: #04AA6D; */
-}
-
-
 .nav-contents {
   display: flex;
   justify-content: flex-end;
@@ -52,10 +47,13 @@ Link.link {
 }
 
 .link {
+  justify-content: baseline;
+  text-decoration: none;
   border: 0px solid red;
   display: flex;
   padding: 8px;
   margin:0;
+  padding-top: 14px;
 
 }
 
@@ -83,6 +81,17 @@ footer {
   flex-wrap: wrap;
   justify-content: center;
   
-  color:beige;
+  color:rgb(255, 255, 255);
 }
+
+
+
+
+
+
+
+
+
+
+
 

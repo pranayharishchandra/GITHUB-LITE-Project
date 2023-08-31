@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 
 function Navbar({ title }) {
     return (
-        <nav className='navbar'>
+        <nav className='navbar' 
+            // style={{width:'100vw', marginLeft:'-50px', marginTop:'0px', overflow:'hidden'}}
+            >
             <div className="github">
                 <FaGithub style={{margin:'10px'}}/>
                 GITHUB

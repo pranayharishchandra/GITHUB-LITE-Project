@@ -11,11 +11,11 @@ import { useContext } from 'react';
 function UserCard({ user: { login, id, avatar_url, html_url } }) { // Rename the key prop to customKey
   const navigate = useNavigate();
 
-  
-  
+
+
   const { getUser } = useContext(GithubContext);
 
-  async function redirectToNewRoute () {
+  async function redirectToNewRoute() {
     await getUser(login);
     navigate(`/user/${login}`);
 
@@ -24,18 +24,21 @@ function UserCard({ user: { login, id, avatar_url, html_url } }) { // Rename the
 
   // NOTE: we are not writing the keynames in string,
   return (
-    <div className="card">
+    <div className="card" style={{ width: '310px', height: '254px' }}>
       <div className="card-details">
-        <div className='user-name-pic'>
+        <div className='user-name-pic' style={{ width: '130%', margin: '-10%' }}>
           <img src={avatar_url} alt='' />
           <p className="text-title">{login}</p>
 
         </div>
-        <p className="text-body">Here are the details of the card</p>
-        <Link to={html_url}><button className="card-button">GITHUB</button></Link>
-        <p>key : {id}</p> {/* Use customKey instead of key */}
+        <div className="card-discription">
+          <p className="text-body">Here are the details of the card</p>
+          
+          <p>key : {id}</p> {/* Use customKey instead of key */}
+        </div>
+
       </div>
-      <button className="card-button" onClick={redirectToNewRoute}>VISIT PROFILE</button>
+      <button className="card-button" onClick={redirectToNewRoute} style={{ cursor: 'pointer' }}>VISIT PROFILE</button>
       {/* <Link to={`/user/${login}`}>  <button className="card-button">VISIT PROFILE</button>  </Link> */}
 
     </div>

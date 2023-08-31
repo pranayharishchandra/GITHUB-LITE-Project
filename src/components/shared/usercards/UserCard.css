@@ -21,7 +21,7 @@
  }
  
  .card-button {
-  transform: translate(-50%, 125%);
+  /* transform: translate(-50%, 125%); */
   width: 60%;
   border-radius: 1rem;
   border: none;
@@ -63,6 +63,7 @@
   justify-content: flex-start;
   position: relative;
   overflow: auto;
+  /* width: 90%; */
  }
 
  .text-title{
@@ -76,4 +77,26 @@
   width: 60px;
   margin: 10px;
   border-radius: 50%;
+ }
+
+
+
+
+
+
+ img {
+  display: flex;
+  margin-bottom: 1.5em;
+  border-radius: 100%;
+  box-shadow: 0 13px 26px rgba(0, 0, 0, .2), 0 3px 6px rgba(0, 0, 0, .2);
+  margin: 5px;
+ }
+
+
+ .card-discription {
+  margin-top: 10px;
+  display: flex;
+  height: 30px;
+  flex-direction: column;
+  width: 130%;
  }
