@@ -6,9 +6,9 @@ function githubReducer (state, action) {
     switch (action.type) {
         case 'GET_USERS':
             return {
-                ...state,                 // common redux syntax
+                ...state,                 
                 users: action.payload,
-                loading: false,           // loading is not passed but it's accessible throughout the funcition
+                loading: false,          
             }
         case 'GET_USER':
             return {
@@ -19,12 +19,19 @@ function githubReducer (state, action) {
         case 'SET_LOADING':
             return {
                 ...state,
-                loading: true,  // basically doing setLoading(true) if we we using useState
+                loading: true,  
             }
         case 'SET_USERS':
             return {
                 ...state,
                 users: action.payload
+            }
+        case 'GET_REPOS':                  // basically fetching repos
+            return {                       // returning an object because initial state is an object
+                ...state,                  // keeping the values of of state object as it it, 
+                                           // as they will be recived by state variable in Github context file
+                repos: action.payload,     // overwirting the values or updating values for the new state
+                loading: false,
             }
         default:
             return state;

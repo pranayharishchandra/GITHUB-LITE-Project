@@ -1,7 +1,12 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  /* overflow-x: hidden; */
+  /* overflow: auto; */
 }
+
+
 
 
 .container {
@@ -11,9 +16,11 @@
   min-height: 100vh;
   width: 100vw;
   flex-direction: column;
-  background-color: rgb(154, 154, 124);
-  color:wheat;
+  /* background-color: rgb(154, 154, 124); */
+  background: linear-gradient(to bottom right, #9e376c, #60accc);
+  color:rgb(231, 216, 216);
   justify-content: space-between ;
+  overflow-x: hidden;
 }
 
 Link.link {
@@ -30,15 +37,13 @@ Link.link {
   width: 100%;
   justify-content: space-between;
   background-color: rgb(39, 59, 71);
-  height:50px
-  /* justify-content: space-evenly; */
+  height:50px;
+  box-shadow: 0px 6px 7px rgba(0,0,0,0.6);
+  /* margin-top: -2px; */
 }
 
 
-.nav-contents {
-  display: flex;
-  justify-content: flex-end;
-}
+
 
 .github {
   text-align: center;
@@ -64,6 +69,7 @@ footer {
   background-color: rgb(39, 59, 71);
   justify-content: center;
   align-items: center;
+  margin-top: 24px;
 }
 
 .footer-container {
@@ -80,13 +86,30 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
   
   color:rgb(255, 255, 255);
 }
 
 
+.nav-contents {
+  margin-top: -2px ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
+.navbar {
+  padding: 0 18px;
+}
+
+.link {
+  text-align: center;
+  font-family: 'Arial', Courier, monospace;
+  color:rgb(231, 216, 216);
+  font-size: 14px;
+}
 
 
 

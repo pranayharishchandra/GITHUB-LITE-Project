@@ -4,6 +4,7 @@ import './Searchbox.css';
 import Alert from '../../pages/Alert';
 import GithubContext from '../../context/github/GithubContext';
 import AlertContext from '../../context/alert/AlertContext';
+import { AiOutlineClear } from "react-icons/ai";
 
 function SearchBox() {
 
@@ -52,7 +53,7 @@ function SearchBox() {
         
         */
        
-        function submiHandler(e) {
+        async function submiHandler(e) {
             e.preventDefault();
     
             
@@ -79,7 +80,7 @@ function SearchBox() {
                 // but now to update the UI we will be requring to show a component, 
                 // so made a alert component
             } else
-                searchUsers(text);
+                await searchUsers(text);
     }
 
     function clearHandler() {
@@ -96,7 +97,7 @@ function SearchBox() {
 
             </div>
             <div className='clear-button-div'>
-                {users.length > 0 && (<button className='clear-button' onClick={clearHandler} style={{ cursor: 'pointer' }}>Clear</button>)}
+                {users.length > 0 && (<button className='clear-button' onClick={clearHandler} style={{ cursor: 'pointer' }}> <AiOutlineClear /> Clear </button>)}
             </div>
             <form onSubmit={submiHandler} role="search">
                 <label htmlFor="search">Search for stuff</label>

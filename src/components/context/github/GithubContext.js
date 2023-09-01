@@ -14,7 +14,8 @@ export function GithubProvider({ children }) {
   // storing initial state of all the variables in an object
   const initialState = {
     users: [],  // details (object) of all the users
-    user: {},  // details of a single user
+    repos: [],  // user repos
+    user:  {},   // details of a single user
     // loading:true,
     loading: false, // making it intially false, so we don't see the loading, UserResults,
     // and we only wanna see loading (loading=true) WHEN THE DATA IS BEING FETCHED
@@ -22,6 +23,7 @@ export function GithubProvider({ children }) {
 
   // dispatch => function -> export the action from here to GithubReducers at a state
   // githubReducer -> the reduce function we are using
+  // basically following is like useState, const [var, setVar] = useState(...), useReducer is similar
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
   // const [users, setUsers] = useState([]); // it will be fetched from the API
@@ -45,6 +47,7 @@ export function GithubProvider({ children }) {
     const params = new URLSearchParams({ q: text });
 
     const response = await fetch(`${GITHUB_URL}/search/users?${params.toString()}`, {
+    // const response = await fetch(`${GITHUB_URL}/users?q=${text}`, { // this link not working idk why
       headers: {
         Authorization: `token ${GITHUB_TOKEN}`,
       },
@@ -183,6 +186,72 @@ export function GithubProvider({ children }) {
 
   };
 
+  
+
+  // FETCHING USER REPOS
+  async function getRepos(login) {
+
+    setLoading();
+
+    const params = new URLSearchParams({
+      sort:'created',
+      per_page: 10,
+    });
+
+    // const response = await fetch(`${GITHUB_URL}/users/${login}/repos`, {
+    const response = await fetch(`${GITHUB_URL}/users/${login}/repos?${params}`, {
+      headers: {
+        Authorization: `token ${GITHUB_TOKEN}`,
+      },
+    });
+
+/**
+[
+    {
+        "id": 472797658,
+        "node_id": "R_kgDOHC5R2g",
+        "name": "cpp-learning",
+        "full_name": "pranayharishchandra/cpp-learning",
+        "private": false,
+        "owner": {
+            "login": "pranayharishchandra",
+            "id": 44168141,
+            "node_id": "MDQ6VXNlcjQ0MTY4MTQx",
+            "avatar_url": "https://avatars.githubusercontent.com/u/44168141?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/pranayharishchandra",
+            "html_url": "https://github.com/pranayharishchandra",
+            "followers_url": "https://api.github.com/users/pranayharishchandra/followers",
+            "following_url": "https://api.github.com/users/pranayharishchandra/following{/other_user}",
+            "gists_url": "https://api.github.com/users/pranayharishchandra/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/pranayharishchandra/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/pranayharishchandra/subscriptions",
+            "organizations_url": "https://api.github.com/users/pranayharishchandra/orgs",
+            "repos_url": "https://api.github.com/users/pranayharishchandra/repos",
+            "events_url": "https://api.github.com/users/pranayharishchandra/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/pranayharishchandra/received_events",
+            "type": "User",
+            "site_admin": false
+        },
+        "html_url": "https://github.com/pranayharishchandra/cpp-learning",
+        "description": null,
+        "fork": false,
+*/
+
+
+    const data  = await response.json(); 
+
+    console.log(data);
+
+    dispatch({
+      type: 'GET_REPOS',
+      payload: data,
+    })
+
+  };
+
+
+
 
   // Set Loading -- uplifting state of loading from false to true
   function setLoading() {
@@ -202,12 +271,12 @@ export function GithubProvider({ children }) {
 
   return <GithubContext.Provider
     value={{
-      // users, 
-      //  loading,
       user: state.user,
       users: state.users,      // user of the current state 
+      repos : state.repos,
       loading: state.loading,
       searchUsers,
+      getRepos,
       setUsers,
       getUser,
 

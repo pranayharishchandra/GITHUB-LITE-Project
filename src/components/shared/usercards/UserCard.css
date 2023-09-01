@@ -10,6 +10,7 @@
   transition: 0.5s ease-out;
   overflow: visible;
   margin: 19px;
+  
  }
  
  .card-details {
@@ -49,7 +50,9 @@
  /*Hover*/
  .card:hover {
   border-color: #008bf8;
-  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.618);
+  transform: scale(1.1);
+  transition: transform 0.25s ease;  
  }
  
  .card:hover .card-button {
@@ -88,8 +91,13 @@
   display: flex;
   margin-bottom: 1.5em;
   border-radius: 100%;
-  box-shadow: 0 13px 26px rgba(0, 0, 0, .2), 0 3px 6px rgba(0, 0, 0, .2);
+  /* box-shadow: 0 13px 26px rgba(0, 0, 0, .2), 0 3px 26px rgba(0, 0, 0, .2); */
+  box-shadow: 12px 6px 16px rgba(0, 0, 0, 0.22);
   margin: 5px;
+
+  /* position: absolute; */
+  left: 0px;
+  border: 2px solid rgba(255, 192, 203, 0.218);
  }
 
 
@@ -100,3 +108,9 @@
   flex-direction: column;
   width: 130%;
  }
+
+
+ .card {
+  border: 2.25px solid rgba(82, 82, 82, 0.441);
+ }
+

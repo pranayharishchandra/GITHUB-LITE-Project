@@ -9,7 +9,7 @@ export function AlertProvider( {children} ) {
     const [ state, dispatch ] = useReducer(alertReducer, initialState);
 
 
-    // set alert
+    // set alert and removing after 3 seconds
     function setAlert (msg, type) {
         dispatch({
             type: 'SET_ALERT',
@@ -26,7 +26,6 @@ export function AlertProvider( {children} ) {
     return <AlertContext.Provider value={{
                                             alert: state,
                                             setAlert,
-
                                         }}>
         { children }
     </AlertContext.Provider>

@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import AlertContext from "../context/alert/AlertContext"
-
+import { RxCross1 } from "react-icons/rx";
 
 /**
  * // it's the code if you were not using alertcontext file
@@ -28,9 +28,15 @@ function Alert({msg}) {
   */
 function Alert() {
     const { alert } = useContext(AlertContext)
-    return (
-        // make sure to write alert!== null, otherise you may be trying to access null.msg 
-        <h3>{alert!== null &&  alert.msg}</h3>
+    return alert !== null && (
+        <>
+
+            <div style={{ display: 'flex', alignItems: 'baseline', position: 'relative', paddingLeft: '20px' }}>
+                <RxCross1 style={{ color: 'wheat', fontSize: '30px', fontWeight: 'bold' }} />
+                <h3 style={{ margin: '20px', position: 'absolute', top: '-18px', left: '30px' }}>{`${alert.msg}`}</h3>
+            </div>
+
+        </>
     )
 }
 
