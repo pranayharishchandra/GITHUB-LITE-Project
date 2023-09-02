@@ -6,12 +6,15 @@
     background: white;
     opacity: 0.65;
     color:black;
-    padding: 30px;
+
     border-radius: 15px;
-    box-shadow: 10px 10px 11px 6px rgba(0, 0, 0, 0.416);
+    box-shadow: 10px 10px 11px 6px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition-duration: 2s;
+    
+    
     
 }
-
 
 
 
@@ -20,6 +23,7 @@
     font-size: 25px;
     font-weight: bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 15px;
 }
 
 
@@ -31,8 +35,26 @@
 }
 
 .repo-list-items {
-    display: flex;
-    /* align-items: baseline; */
+    min-height: 65px;
+    display: flex;  
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.585);
+    width: 575px;
+    padding: 7px;
+    color: white;
+    border-radius: 10px;
+    margin:5px;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+    transition-duration: .3s;
+
+}
+
+.repo-list-items:hover{
+    background-color: rgb(160, 96, 168);
+    color:white;
+    transform: scale(1.15);
+    transition: ease-in-out 0sec;
+    box-shadow: 5px 0px 5px 1.2px rgba(0, 0, 0, 0.5);
 }
 
 .repo-icon {
@@ -42,9 +64,35 @@
 
 .repo-name {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    margin:3px;
+}
+
+.repo-item-discripition {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 200;
+    margin:3px;
+
+    /* color:rgb(212, 249, 242) */
+
 }
 
 
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.link-icon {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 3px;
+    margin-bottom: -5px;
+}
 
 
 

@@ -47,9 +47,6 @@ function UserCard({ user: { login, id, avatar_url, html_url } }) { // Rename the
 
   // const navigate = useNavigate();
 
-  function visitGithub (e) {
-    <a href={html_url}></a>
-  }
 
 
   // NOTE: we are not writing the keynames in string,
@@ -64,7 +61,7 @@ function UserCard({ user: { login, id, avatar_url, html_url } }) { // Rename the
         <div className="card-discription" style={{overflow:'show'}}>
 
           <a href={html_url} style={{textDecoration:'none'}}>
-            <p className="text-body" onClick={visitGithub} style={{cursor:'pointer', width:'200px'}}>  VISIT GITHUB  </p>
+            <p className="text-body" style={{cursor:'pointer', width:'200px'}}>  VISIT GITHUB  </p>
           </a>
 
           
