@@ -49,7 +49,7 @@ export function GithubProvider({ children }) {
 
     const { items: data } = await response.json(); // parsing the data fetched from the API to json
 
-    console.log(data);
+    console.log('searchUsers',data);
 
     /** FORMAT OF API FETCHED
      * * await fetch(`${GITHUB_URL}/search/users?q=${params}`
@@ -109,7 +109,7 @@ export function GithubProvider({ children }) {
 
     // for a single user we recieve as an object
     const data = await response.json();
-    console.log(data);
+    console.log('getUser', data);
     /* USER OBJ
     {
         "login": "pranayharishchandra",
@@ -222,7 +222,7 @@ export function GithubProvider({ children }) {
 
     const data  = await response.json(); 
 
-    console.log(data);
+    console.log('getRepos', data);
 
     dispatch({
       type: 'GET_REPOS',

@@ -21,7 +21,7 @@ function User() {
 
     const params = useParams(); // see technical thapa video 
 
-    
+
     /*  Get the login param from the URL... http://localhost:3000/user/pranayharishchandra 
         "/user/:login"  ... remember this
         so when use have written somthing after :
@@ -46,7 +46,7 @@ function User() {
         return (<Spinner />)
     }
 
-    console.log('user', user);
+    console.log('User.jsx:, user:', user);
 
     const {
         name,
@@ -65,8 +65,12 @@ function User() {
         hireable,
     } = user;
 
+    console.log('name : ', name)
+    console.log('name : ', typeof name)
+    if (name)
+        console.log('name : ', name.toUpperCase())
 
-    return (
+    return name && (
         <div className="profile-card-container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', transitionDuration: '1s' }}>
             <div className="profile-card" style={{ width: '100vw', overflow: 'hidden', justifyContent: 'center', alignItems: 'center', marginBottom: '50px', transitionDuration: '2s' }}>
 
@@ -84,10 +88,12 @@ function User() {
                         <div >
                             <h3 className="name" >{`${name}`}</h3>
                             <div>
-                                {hireable && <p className="title" >HIRABLE</p>}
+                                {hireable && <p className="title"> HIRABLE </p>}
                             </div>
 
                         </div>
+
+
 
 
 
@@ -103,6 +109,8 @@ function User() {
                         {!location && (
                             <div style={{ display: 'grid', margin: '0 auto' }}>
                                 <p className="title" style={{ marginTop: '15px', marginBottom: '-9px' }}>    <MdLocationOn style={{ fontSize: '20px' }} />    </p>
+
+
                                 <p className="title" style={{ marginBottom: '15px' }}>   {`${name.toUpperCase()}'s`} LOCATION NOT AVALIBLE  </p>
                             </div>
                         )}
@@ -137,7 +145,7 @@ function User() {
                 </div>
             </div>
 
-            { public_repos !== 0 && <RepoList repos={repos} /> }
+            {public_repos !== 0 && <RepoList repos={repos} />}
 
         </div>
 

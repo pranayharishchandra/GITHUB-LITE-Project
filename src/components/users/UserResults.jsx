@@ -37,10 +37,11 @@ function UserResults() {
         <div className="users-container">
             {users.map((user) => (
                 <UserCard 
-                    className="user" 
-                    user={user}
-                    key={user.id} 
+                           className="user" 
+                           user={user}
+                           key={user.id} // eslint-disable-next-line react/no-array-index-key
                     />
+
             ))}
             
         </div>
