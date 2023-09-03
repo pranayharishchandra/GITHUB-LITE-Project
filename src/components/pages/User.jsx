@@ -1,11 +1,10 @@
 // this page is for individual user profile
-import { FaCodepen, FaUserFriends, FaUsers,  } from 'react-icons/fa'
+import { FaUserFriends, FaUsers, } from 'react-icons/fa'
 import { PiFolderUserBold } from 'react-icons/pi'
 import { MdLocationOn } from "react-icons/md";
 
 import { useContext, useEffect } from "react"
-import { useParams } from "react-router-dom"
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom"
 
 import GithubContext from "../context/github/GithubContext"
 import Spinner from "../shared/spinner/Spinner";
@@ -17,14 +16,18 @@ import './style/user.css'
 
 // match doesn't works in version 6, here use params, it works with version 5 and 6 both
 function User() {
-    // const { getUser, user, loading, getUserRepos, repos } = useContext(GithubContext);
 
-    const { getRepos, repos } = useContext(GithubContext);
-    const params = useParams();
+    const { getRepos, repos, user, loading, getUser } = useContext(GithubContext);
 
-    const { user, loading, } = useContext(GithubContext);
-    const { getUser } = useContext(GithubContext);
+    const params = useParams(); // see technical thapa video 
 
+    
+    /*  Get the login param from the URL... http://localhost:3000/user/pranayharishchandra 
+        "/user/:login"  ... remember this
+        so when use have written somthing after :
+        you can extract that part using useParams, if not understood visit following link
+        https://reactrouter.com/en/main/hooks/use-params#useparams 
+    */
 
     useEffect(() => {
         async function fetchData() {
@@ -36,7 +39,7 @@ function User() {
             await getRepos(params.login);
         };
         fetchData2();
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (loading) {
@@ -63,20 +66,14 @@ function User() {
     } = user;
 
 
-    /*  Get the login param from the URL... http://localhost:3000/user/pranayharishchandra 
-        "/user/:login"  ... remember this
-        so when use have written somthing after :
-        you can extract that part using useParams, if not understood visit following link
-        https://reactrouter.com/en/main/hooks/use-params#useparams 
-    */
     return (
-        <div className="profile-card-container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', }}>
-            <div className="profile-card" style={{ width: '100vw', overflow: 'hidden', justifyContent: 'center', alignItems: 'center', marginBottom: '50px' }}>
+        <div className="profile-card-container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', transitionDuration: '1s' }}>
+            <div className="profile-card" style={{ width: '100vw', overflow: 'hidden', justifyContent: 'center', alignItems: 'center', marginBottom: '50px', transitionDuration: '2s' }}>
 
                 <input id="slider" className="customSlider" type="checkbox" />
                 <label htmlFor="slider"></label>
 
-                <div className="wrapper" style={{ width: '80vw', overflow: 'hidden', margin: '15px auto', opacity: '.88' }}>
+                <div className="wrapper" style={{ width: '80vw', overflow: 'hidden', margin: '15px auto', opacity: '.88', transitionDuration: '1s' }}>
 
 
                     <div className="profile">
@@ -94,12 +91,19 @@ function User() {
 
 
 
-                        {bio && <p className="description" style={{ fontSize: '18px', marginTop:'10px', marginBottom:'-10px' }}>{bio}</p>}
+                        {bio && <p className="description" style={{ fontSize: '18px', marginTop: '10px', marginBottom: '-10px' }}>{bio}</p>}
 
-                        {location && ( 
-                            <div style={{display:'grid', margin:'0 auto' }}>
-                                <p className="title" style={{ marginTop: '15px', marginBottom:'-9px'}}>    <MdLocationOn style={{fontSize:'20px'}}/>    </p> 
-                                <p className="title" style={{  marginBottom: '15px' }}>   {`${location}`}   </p>
+                        {location && (
+                            <div style={{ display: 'grid', margin: '0 auto' }}>
+                                <p className="title" style={{ marginTop: '15px', marginBottom: '-9px' }}>    <MdLocationOn style={{ fontSize: '20px' }} />    </p>
+                                <p className="title" style={{ marginBottom: '15px' }}>   {`${location}`}   </p>
+                            </div>
+                        )}
+
+                        {!location && (
+                            <div style={{ display: 'grid', margin: '0 auto' }}>
+                                <p className="title" style={{ marginTop: '15px', marginBottom: '-9px' }}>    <MdLocationOn style={{ fontSize: '20px' }} />    </p>
+                                <p className="title" style={{ marginBottom: '15px' }}>   {`${name.toUpperCase()}'s`} LOCATION NOT AVALIBLE  </p>
                             </div>
                         )}
 
@@ -130,14 +134,10 @@ function User() {
                             <p>Following</p>
                         </div>
                     </div>
-                    <div className="repo-items">
-
-                    </div>
                 </div>
             </div>
 
-            {public_repos !== 0 && <RepoList repos={repos} />}
-
+            { public_repos !== 0 && <RepoList repos={repos} /> }
 
         </div>
 

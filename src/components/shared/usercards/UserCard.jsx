@@ -1,18 +1,20 @@
 import './UserCard.css';
-import PropTypes from 'prop-types';
-import { Link, useNavigate } from 'react-router-dom';
-import GithubContext from '../../context/github/GithubContext';
-import { useContext } from 'react';
+
+import  PropTypes from 'prop-types';
+
+import { useNavigate } from 'react-router-dom';
 
 
-// function UserCard({ userName, customKey }) { // Rename the key prop to customKey
+
 // user is the complete object about user being passed in UserResults.jsx
-function UserCard({ user: { login, id, avatar_url, html_url } }) { // Rename the key prop to customKey
+
+// function UserCard({ user: { login, id, avatar_url, html_url } }) { // Rename the key prop to customKey
+function UserCard ({ user }) { 
   const navigate = useNavigate();
 
+  const { login, type, avatar_url, html_url } = user;
 
-
-  const { getUser } = useContext(GithubContext);
+  // const { getUser } = useContext(GithubContext);
 
 
   /*FLOW OF THE CODE -- IMP
@@ -27,6 +29,8 @@ function UserCard({ user: { login, id, avatar_url, html_url } }) { // Rename the
                                                           -> parent function before redirecting the new page, we are using await getUser,
                                                           -> so that when we reach the next page then we have the variables exported by 
                                                           -> GithubUser function already updated, and we can use them directly.
+                                    IMPORTANT          ====> but this method will not fecth info when the child page reloaded.., 
+                                                                so this method is waste.
 
                                                           
       CASE 2 : WHEN WE ARE GOING TO DIFFERENT COMPONENT  -->  passing the function getUser or whatever as props
@@ -34,19 +38,14 @@ function UserCard({ user: { login, id, avatar_url, html_url } }) { // Rename the
                                                      
     2. with cards i mean information (login) of each user
     3. if i wanted to use getUser in User.jsx then flow should would have been like:
-        1.  
-  
-  
   */
 
+ // const navigate = useNavigate();
   async function redirectToNewRoute() {
     // await getUser(login); 
     navigate(`/user/${login}`);
 
   };
-
-  // const navigate = useNavigate();
-
 
 
   // NOTE: we are not writing the keynames in string,
@@ -65,12 +64,12 @@ function UserCard({ user: { login, id, avatar_url, html_url } }) { // Rename the
           </a>
 
           
-          <p>key : {id}</p> {/* Use customKey instead of key */}
+          <p>Type : {type}</p> {/* Use customKey instead of key */}
         </div>
 
       </div>
       <button className="card-button" onClick={redirectToNewRoute} style={{ cursor: 'pointer' }}>VISIT PROFILE</button>
-      {/* <Link to={`/user/${login}`}>  <button className="card-button">VISIT PROFILE</button>  </Link> */}
+
 
     </div>
   );

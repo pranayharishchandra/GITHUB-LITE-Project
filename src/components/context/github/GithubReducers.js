@@ -1,8 +1,7 @@
 
-
 function githubReducer (state, action) {
-    // state => current state
-    // action => string, "increase" or "decrease"
+    // state  => current state
+    // action => contains the object { type: ___, payload: ___ }
     switch (action.type) {
         case 'GET_USERS':
             return {
@@ -36,7 +35,6 @@ function githubReducer (state, action) {
         default:
             return state;
     }
-
 }
 
 export default githubReducer;

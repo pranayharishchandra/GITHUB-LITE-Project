@@ -4,6 +4,8 @@ import alertReducer from "./AlertReducers";
 const AlertContext = createContext();
 
 export function AlertProvider( {children} ) {
+
+    /**IN CONTEXT FILES YOU DON'T USE USESTATE, BECAUSE YOU CAN USE REDUCERS, i.e. best practice */
     
     const initialState = null;
     const [ state, dispatch ] = useReducer(alertReducer, initialState);
@@ -23,10 +25,12 @@ export function AlertProvider( {children} ) {
     }
 
 
-    return <AlertContext.Provider value={{
+    return <AlertContext.Provider value={
+                                          {  
                                             alert: state,
                                             setAlert,
-                                        }}>
+                                          }
+                                        }>
         { children }
     </AlertContext.Provider>
 

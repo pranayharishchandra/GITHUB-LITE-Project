@@ -23,7 +23,6 @@ function App() {
                 <Route path='/home'         element={<Home />} />
                 <Route path='/'             element={<Home />} />
                 <Route path='/about'        element={<About />} />
-                {/* <Route path='/user/'        element={<User />} /> */}
                 <Route path='/user/:login'  element={<User />} />
                 <Route path='/pagenotfound' element={<Pagenotfound />} />
                 <Route path='/*'            element={<Pagenotfound />} />

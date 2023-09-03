@@ -6,23 +6,26 @@ import GithubContext from "../context/github/GithubContext";
 
 function UserResults() {
 
-    // const { users, loading, fetchUsers } = useContext(GithubContext);
     const { users, loading  } = useContext(GithubContext);
+    
+    
+    /**SHIFTED  async function fetchUsers() { } to GithubContext page
+   
+     
+    const [users, setUsers] = useState([]); // it will be fetched from the API
+    const [loading, setLoading] = useState(true);
 
-    // const [users, setUsers] = useState([]); // it will be fetched from the API
-    // const [loading, setLoading] = useState(true);
-
-
-    // useEffect(() => {
-    //     fetchUsers();
-    // }, [])
-
-
-
-    // async function fetchUsers() { }
+    const { users, loading, fetchUsers } = useContext(GithubContext);
+    
+    useEffect(() => {
+            fetchUsers();
+        }, [])
+        
+        
+    async function fetchUsers() { }
+    */
 
     if (loading) {
-        // style not working
         return <Spinner style={{margin:'auto'}}/>
     }
 
@@ -33,11 +36,8 @@ function UserResults() {
     return (
         <div className="users-container">
             {users.map((user) => (
-                // <h3 className="user">{user.login}</h3>
                 <UserCard 
                     className="user" 
-                    // userName={user.login} 
-                    // customKey={user.id} 
                     user={user}
                     key={user.id} 
                     />
