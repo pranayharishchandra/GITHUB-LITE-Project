@@ -10,7 +10,8 @@ import GithubContext from "../context/github/GithubContext"
 import Spinner from "../shared/spinner/Spinner";
 import RepoList from "../repos/RepoList";
 
-import { getUser, getRepos } from '../context/github/GithubActions';
+// import { getUser, getRepos } from '../context/github/GithubActions';
+import { getUserAndRepos } from '../context/github/GithubActions';
 
 import './style/user.css'
 
@@ -31,43 +32,60 @@ function User() {
         https://reactrouter.com/en/main/hooks/use-params#useparams 
     */
 
-    useEffect(() => {
-        dispatch({
-            type: 'SET_LOADING'
-        })
 
-        async function fetchUserData() {
-            // await getUser(params.login);
-            const userData = await getUser(params.login);
+        useEffect(() => {
+            dispatch({ type: 'SET_LOADING' })
 
+            async function fetchUserData() {
+              const userData = await getUserAndRepos(params.login)
+              dispatch({ type: 'GET_USER_AND_REPOS', payload: userData })
+            }
+        
+            fetchUserData()
+          }, [dispatch, params.login])
+
+
+
+
+
+    /** useEffect BEFORE AXIOS
+        useEffect(() => {
             dispatch({
-                type: 'GET_USER',
-                payload: userData,
+                type: 'SET_LOADING'
             })
-        };
-
-        fetchUserData();
-
-        async function fetchRepoData() {
-            // await getRepos(params.login);
-            const userRepos = await getRepos(params.login);
-
-            dispatch({
-                type: 'GET_REPOS',
-                payload: userRepos,
-            })
-
-        };
-
-        fetchRepoData();
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        /* ADDING DEPENDENCIES DON'T DO INFINITE RE-RENDERING BECAUSE 
-        -> this is fine because these things aren't constantly changing like before when we had our context        
-        functions that got recreated every time the state changed.
-        So we can pass these in as dependencies.
+    
+            async function fetchUserData() {
+                // await getUser(params.login);
+                const userData = await getUser(params.login);
+    
+                dispatch({
+                    type: 'GET_USER',
+                    payload: userData,
+                })
+            };
+    
+            fetchUserData();
+    
+            async function fetchRepoData() {
+                // await getRepos(params.login);
+                const userRepos = await getRepos(params.login);
+    
+                dispatch({
+                    type: 'GET_REPOS',
+                    payload: userRepos,
+                })
+    
+            };
+    
+            fetchRepoData();
+    
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            //  ADDING DEPENDENCIES DON'T DO INFINITE RE-RENDERING BECAUSE 
+            // -> this is fine because these things aren't constantly changing like before when we had our context        
+            // functions that got recreated every time the state changed.
+            // So we can pass these in as dependencies.
+        }, [dispatch, params.login]);
         */
-    }, [dispatch, params.login]);
 
     if (loading) {
         return (<Spinner />)
