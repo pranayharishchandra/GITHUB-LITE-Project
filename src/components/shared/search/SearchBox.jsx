@@ -5,11 +5,13 @@ import Alert from '../../pages/Alert';
 import GithubContext from '../../context/github/GithubContext';
 import AlertContext from '../../context/alert/AlertContext';
 import { AiOutlineClear } from "react-icons/ai";
+import { searchUsers } from '../../context/github/GithubActions';
 
 function SearchBox() {
 
     const [text, setText] = useState('');
-    const { users, searchUsers, setUsers } = useContext(GithubContext);
+    // const { users, searchUsers, clearUsers } = useContext(GithubContext);
+    const { users, dispatch } = useContext(GithubContext);
     const { setAlert } = useContext(AlertContext)
 
     /*
@@ -52,50 +54,64 @@ function SearchBox() {
             setAlertMsg('Username can not contain special characters');
         
         */
-       
-        async function submiHandler(e) {
-            e.preventDefault();
-    
-            
-            // setText('')
-            const specialChar = [',', ";", '"', '"', ' ', "=", '+', '-', '*', '@', '!', '#', '%', '&', "(", ")", '^']
-            
-            function hasSpecialCharacter(text) {
-                return specialChar.some(char => text.includes(char));
-            }
-    
-            // creating a contextfile, reducer file was not required in here, but just did that for learning
-    
-            // you can write 'pranay=' in the search and press enter, then go to react components extension
-            // Alert.Provider, and there open hooks there you will see in 
-            // hooks, them message will ve shown, but will get set to null after 3 seconds
-            if (text === '') {
-                setAlert("Enter something", "NULL ERROR");
-                return;
 
-            } else if (hasSpecialCharacter(text)) {
-                setAlert('Username can not contain special characters', "INVALID USERNAME ERROR");
-                return;
+    async function submiHandler(e) {
+        e.preventDefault();
 
-                // but now to update the UI we will be requring to show a component, 
-                // so made a alert component
-            } else
-                await searchUsers(text);
+
+        // setText('')
+        const specialChar = [',', ";", '"', '"', ' ', "=", '+', '-', '*', '@', '!', '#', '%', '&', "(", ")", '^']
+
+        function hasSpecialCharacter(text) {
+            return specialChar.some(char => text.includes(char));
+        }
+
+        // creating a contextfile, reducer file was not required in here, but just did that for learning
+
+        // you can write 'pranay=' in the search and press enter, then go to react components extension
+        // Alert.Provider, and there open hooks there you will see in 
+        // hooks, them message will ve shown, but will get set to null after 3 seconds
+        if (text === '') {
+            setAlert("Enter something", "NULL ERROR");
+            return;
+
+        } else if (hasSpecialCharacter(text)) {
+            setAlert('Username can not contain special characters', "INVALID USERNAME ERROR");
+            return;
+
+            // but now to update the UI we will be requring to show a component, 
+            // so made a alert component
+        } else {
+            // await searchUsers(text);
+            // REAFACTORING 
+            dispatch({
+                type: 'SET_LOADING',
+            })
+
+            const users = await searchUsers(text); // since now this function returns data
+
+            dispatch({
+                type: 'GET_USERS',
+                payload: users,
+            })
+        }
     }
 
     function clearHandler() {
-        setUsers([]);
+        // clearUsers([]); // clear users
+        dispatch({
+            type: 'CLEAR_USERS',
+            payload: users
+        })
         setText('')
     }
 
     return (
         <div className='form-conatainer' style={{ margin: '50px' }}>
             <div className="alert-message">
-                {/* following line is to show alert when not using AlertContext file */}
-                {/* {showAlert && <Alert msg={msg} />} */}
                 <Alert />
-
             </div>
+
             <div className='clear-button-div'>
                 {users.length > 0 && (<button className='clear-button' onClick={clearHandler} style={{ cursor: 'pointer' }}> <AiOutlineClear /> Clear </button>)}
             </div>

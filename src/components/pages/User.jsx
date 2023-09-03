@@ -10,6 +10,7 @@ import GithubContext from "../context/github/GithubContext"
 import Spinner from "../shared/spinner/Spinner";
 import RepoList from "../repos/RepoList";
 
+import { getUser, getRepos } from '../context/github/GithubActions';
 
 import './style/user.css'
 
@@ -17,7 +18,8 @@ import './style/user.css'
 // match doesn't works in version 6, here use params, it works with version 5 and 6 both
 function User() {
 
-    const { getRepos, repos, user, loading, getUser } = useContext(GithubContext);
+    // const { getRepos, repos, user, loading, getUser } = useContext(GithubContext);
+    const { repos, user, loading, dispatch } = useContext(GithubContext);
 
     const params = useParams(); // see technical thapa video 
 
@@ -30,17 +32,42 @@ function User() {
     */
 
     useEffect(() => {
-        async function fetchData() {
-            await getUser(params.login);
-        };
-        fetchData();
+        dispatch({
+            type: 'SET_LOADING'
+        })
 
-        async function fetchData2() {
-            await getRepos(params.login);
+        async function fetchUserData() {
+            // await getUser(params.login);
+            const userData = await getUser(params.login);
+
+            dispatch({
+                type: 'GET_USER',
+                payload: userData,
+            })
         };
-        fetchData2();
+
+        fetchUserData();
+
+        async function fetchRepoData() {
+            // await getRepos(params.login);
+            const userRepos = await getRepos(params.login);
+
+            dispatch({
+                type: 'GET_REPOS',
+                payload: userRepos,
+            })
+
+        };
+
+        fetchRepoData();
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        /* ADDING DEPENDENCIES DON'T DO INFINITE RE-RENDERING BECAUSE 
+        -> this is fine because these things aren't constantly changing like before when we had our context        
+        functions that got recreated every time the state changed.
+        So we can pass these in as dependencies.
+        */
+    }, [dispatch, params.login]);
 
     if (loading) {
         return (<Spinner />)
@@ -65,10 +92,6 @@ function User() {
         hireable,
     } = user;
 
-    console.log('name : ', name)
-    console.log('name : ', typeof name)
-    if (name)
-        console.log('name : ', name.toUpperCase())
 
     return name && (
         <div className="profile-card-container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', transitionDuration: '1s' }}>

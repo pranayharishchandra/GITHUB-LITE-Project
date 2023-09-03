@@ -20,10 +20,11 @@ function githubReducer (state, action) {
                 ...state,
                 loading: true,  
             }
-        case 'SET_USERS':
+        case 'CLEAR_USERS':
             return {
                 ...state,
-                users: action.payload
+                // users: action.payload
+                users: [],
             }
         case 'GET_REPOS':                  // basically fetching repos
             return {                       // returning an object because initial state is an object
