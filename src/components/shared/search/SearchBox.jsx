@@ -60,7 +60,8 @@ function SearchBox() {
 
 
         // setText('')
-        const specialChar = [',', ";", '"', '"', ' ', "=", '+', '-', '*', '@', '!', '#', '%', '&', "(", ")", '^']
+        // const specialChar = [',', ";", '"', '"', ' ', "=", '+', '-', '*', '@', '!', '#', '%', '&', "(", ")", '^']
+        const specialChar = [',', ";", '"', '"', "=", '+', '-', '*', '@', '!', '#', '%', '&', "(", ")", '^']
 
         function hasSpecialCharacter(text) {
             return specialChar.some(char => text.includes(char));
